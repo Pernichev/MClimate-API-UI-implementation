@@ -27,12 +27,38 @@ router.post("/login", (req, res) => {
     res.cookie("access_token", response.data.auth.access_token, {
       maxAge: 86400000
     });
+    res.cookie("refresh_token", response.data.auth.refresh_token, {
+      maxAge: 86400000
+    });
+    res.redirect("/api/controllers");
+  });
+});
+
+// Renew access token
+router.post("/renew_token", auth.isAuth, (req, res) => {
+  axios({
+    method: "post",
+    url: process.env.API_URL + "/auth/renew",
+    data: {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      refresh_token: req.cookies.refresh_token
+    },
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => {
+    res.cookie("access_token", response.data.auth.access_token, {
+      maxAge: 86400000
+    });
+
     res.redirect("/api/controllers");
   });
 });
 
 // Get a list of all controllers owned by user
 router.get("/controllers", auth.isAuth, (req, res) => {
+  console.log(req.cookies);
   axios({
     method: "get",
     url: process.env.API_URL + "/controllers",
@@ -46,6 +72,7 @@ router.get("/controllers", auth.isAuth, (req, res) => {
     res.render("controllers", {
       title: "Controllers",
       controllers: controllers.controller
+      // cookieExpTime:
     });
   });
 });
