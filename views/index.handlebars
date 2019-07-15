@@ -1,0 +1,19 @@
+<h1 class="text-center mb-3">{{title}}</h1>
+
+<form action="/api/login" class="mb-4" method="POST">
+    <div class="form-group">
+        <label for="username">Username</label>:</label>
+        <input type="text" name="username" class="form-control">
+    </div>
+    <div class="form-group"> 
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control">
+    </div>
+    <input type="submit" value="Login" class="btn btn-primary btn-block">
+</form>
+
+{{!-- <ul class="list-group">
+    {{#each members}}
+        <li class="list-group-item">{{this.name}}: {{this.email}}</li>
+    {{/each}}
+</ul> --}}

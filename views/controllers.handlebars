@@ -1,0 +1,40 @@
+<h1 class="text-center mb-3">{{title}}</h1>
+
+{{#each controllers}}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{this.name}}
+          <span class="float-right">{{#if this.online}}
+            <span class="text-success">ONLINE</span>
+            {{else}}
+            <span class="text-danger">OFFLINE</span>
+            {{/if}}
+          </span>
+        </h5>
+        <p class="card-text">{{this.type}}
+          <span class="float-right">
+            <input type="checkbox" {{#if this.relay_state }} checked {{else}} {{/if}} data-toggle="toggle"
+              data-size="sm" {{#if this.online }} {{else}} disabled {{/if}}>
+          </span>
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
+
+
+{{!-- serial_number: 'RVO415306BLF4',
+       mac: 'A81B6A7BD5CD',
+       firmware_version: 'V1SHTHF',
+       name: 'Nickole\'s plug',
+       type: 'smart_plug',
+       room_id: null,
+       created: '2019-01-23 12:04:43',
+       assigned_at: '2019-07-11 23:57:31',
+       id: 15306,
+       online: true,
+       relay_state: false, --}}
