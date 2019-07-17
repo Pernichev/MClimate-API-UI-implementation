@@ -5,13 +5,22 @@
         <label for="username">Username</label>:</label>
         <input type="text" name="username" class="form-control">
     </div>
-    <div class="form-group"> 
+    <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" name="password" class="form-control">
     </div>
     <input type="submit" value="Login" class="btn btn-primary btn-block">
 </form>
 
+<div class="text-center">
+    <p>or click this:</p>
+
+    <a href="https://auth.seemelissa.com/?response_type=code&client_id=5d27084f51a3b&state=STATE&redirect_uri=http://localhost:5000/api/callback"
+        class="btn btn-success">
+        Login using OAuth2
+    </a>
+
+</div>
 {{!-- <ul class="list-group">
     {{#each members}}
         <li class="list-group-item">{{this.name}}: {{this.email}}</li>

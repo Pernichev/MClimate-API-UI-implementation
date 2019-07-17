@@ -7,9 +7,36 @@ const axios = require("axios");
 
 const auth = require("./auth.js");
 
-// Login using OAuth2
-// Returns Access_token to include in further requests
+// OAuth 2 Login
+router.get("/callback", (req, res) => {
+  let authCode = req.query.code;
+  console.log(authCode);
+  axios({
+    method: "post",
+    url: process.env.API_URL + "/token",
+    data: {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      grant_type: "authorization_code",
+      code: authCode,
+      redirect_uri: "http://localhost:5000/api/callback"
+    },
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function(response) {
+    res.cookie("access_token", response.data.auth.access_token, {
+      maxAge: 86400000
+    });
+    res.cookie("refresh_token", response.data.auth.refresh_token, {
+      maxAge: 86400000
+    });
+    res.redirect("/api/controllers");
+  });
+});
 
+// Manual login
+// Returns Access_token to include in further requests
 router.post("/login", (req, res) => {
   axios({
     method: "post",

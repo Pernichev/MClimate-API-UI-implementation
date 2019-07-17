@@ -17,8 +17,9 @@ $("#device-list").on("change", "input[type=checkbox]", function() {
       command: "switch_on_off",
       state: is_checked ? "on" : "off"
     }
-  }).done(function() {
+  }).done(function(response) {
     state = is_checked ? "on" : "off";
     console.log("switched state to " + state);
+    console.log(response);
   });
 });
